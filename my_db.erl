@@ -1,11 +1,11 @@
--module(db_server).
+-module(my_db).
 
 -export([start/0, stop/0]).
 
 -export([delete/1, loop/1, match/1, read/1, write/2]).
 
 start() ->
-    register(db, spawn(db_server, loop, [[]])), ok.
+    register(db, spawn(?MODULE, loop, [db:new()])), ok.
 
 stop() -> db ! stop.
 
